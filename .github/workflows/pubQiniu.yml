@@ -3,7 +3,7 @@ name: pubQiniu
 on:
   push:
     paths:
-      - '.github/workflows/*'
+      - '.github/workflows/pubQiniu.yml'
 
 jobs:
   deploy:
@@ -27,3 +27,4 @@ jobs:
           source_dir: './'
           dest_dir: '/'
           ignore_source_map: true
+          overwrite: ture

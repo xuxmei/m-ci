@@ -3,7 +3,7 @@ name: pubOss
 on:
   push:
     paths:
-      - '.github/workflows/*'
+      - '.github/workflows/pubOss.yml'
 
 jobs:
   deploy:
