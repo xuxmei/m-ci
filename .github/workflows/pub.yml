@@ -1,0 +1,31 @@
+name: pub
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 下载release文件
+        uses: robinraju/release-downloader@v1.8
+        with:
+          repository: ${{ secrets.ORIGIN_REPO }}
+          token: ${{ secrets.ORIGIN_REPO_TOKEN }}
+          latest: true
+          fileName: "*"
+      - name: 列出文件
+        run: ls -l
+      - name: 同步到其他仓库
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: "*"
+          # note you'll typically need to create a personal access token
+          # with permissions to create releases in the other repo
+          token: ${{ secrets.TARGET_REPO_TOKEN }}
+        env:
+          GITHUB_REPOSITORY: ${{ secrets.TAEGET_REPO }}
