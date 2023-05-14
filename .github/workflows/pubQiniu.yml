@@ -1,0 +1,29 @@
+name: pubQiniu
+
+on:
+  push:
+    paths:
+      - '.github/workflows/*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 下载release文件
+        uses: robinraju/release-downloader@v1.8
+        with:
+          repository: ${{ secrets.ORIGIN_REPO }}
+          token: ${{ secrets.ORIGIN_REPO_TOKEN }}
+          latest: true
+          fileName: "*"
+      - name: 列出文件
+        run: ls -l
+      - name: 部署到七牛云
+        uses: hujiulong/action-qiniu-upload@master
+        with:
+          access_key: ${{ secrets.QINIU_KEY_ID }}
+          secret_key: ${{ secrets.QINIU_KEY_SECRET }}
+          bucket:  ${{ secrets.QINIU_BUCKET }}
+          source_dir: './'
+          dest_dir: '/'
+          ignore_source_map: true
