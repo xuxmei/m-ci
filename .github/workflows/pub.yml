@@ -27,5 +27,4 @@ jobs:
           # note you'll typically need to create a personal access token
           # with permissions to create releases in the other repo
           token: ${{ secrets.TARGET_REPO_TOKEN }}
-        env:
-          GITHUB_REPOSITORY: ${{ secrets.TAEGET_REPO }}
+          repository: ${{ secrets.TAEGET_REPO }}
