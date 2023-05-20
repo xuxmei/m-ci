@@ -1,0 +1,28 @@
+name: pubCoding
+
+on:
+  push:
+    paths:
+      - '.github/workflows/pubCoding.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 下载release文件
+        uses: robinraju/release-downloader@v1.8
+        with:
+          repository: ${{ secrets.ORIGIN_REPO }}
+          token: ${{ secrets.ORIGIN_REPO_TOKEN }}
+          latest: true
+          fileName: "*"
+      - name: 列出文件
+        run: ls -l
+      - name: 发布
+      - run: |
+        git init
+        git add .
+        git commit -m "更新文件"
+        git remote add origin secrets.CODING_REPO
+        git push origin master -f
+
