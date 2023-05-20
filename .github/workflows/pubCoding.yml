@@ -21,8 +21,10 @@ jobs:
       - name: 发布
         run: |
           git init
+          git config user.email ${{secrets.GIT_EMAIL}}
+          git config user.name ${{secrets.GIT_NAME}}
           git add .
           git commit -m "更新文件"
-          git remote add origin secrets.CODING_REPO
+          git remote add origin ${{secrets.CODING_REPO}}
           git push origin master -f
 
