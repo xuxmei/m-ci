@@ -20,9 +20,9 @@ jobs:
         run: ls -l
       - name: 发布
       - run: |
-        git init
-        git add .
-        git commit -m "更新文件"
-        git remote add origin secrets.CODING_REPO
-        git push origin master -f
+          git init
+          git add .
+          git commit -m "更新文件"
+          git remote add origin secrets.CODING_REPO
+          git push origin master -f
 
