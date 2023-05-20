@@ -19,7 +19,7 @@ jobs:
       - name: 列出文件
         run: ls -l
       - name: 发布
-      - run: |
+        run: |
           git init
           git add .
           git commit -m "更新文件"
